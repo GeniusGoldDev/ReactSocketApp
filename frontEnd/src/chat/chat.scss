@@ -1,0 +1,122 @@
+@import "../globals";
+@mixin scrollbars(
+  $size,
+  $foreground-color,
+  $background-color: mix($foreground-color, white, 50%)
+) {
+  //stylesheet for the display in Google Chrome
+  &::-webkit-scrollbar {
+    height: $size;
+    width: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: $foreground-color;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: $background-color;
+  }
+
+  // stylesheet for the display in Internet Explorer
+  & {
+    scrollbar-track-color: $background-color;
+    scrollbar-face-color: $foreground-color;
+  }
+}
+.chat {
+  display: flex;
+  width: 400px;
+  padding: 1rem;
+  justify-content: space-between;
+  height: 600px;
+  flex-direction: column;
+  background-color: $greyColor;
+  .user-name {
+    width: 100%;
+    text-align: start;
+    h2 {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 300;
+      padding-bottom: 1rem;
+    }
+  }
+  .chat-message {
+    @include scrollbars(5px, $backgroundColor, $yellowColor);
+    height: 70%;
+    display: flex;
+    overflow-y: auto;
+    align-content: flex-start;
+    width: 100%;
+    flex-direction: column;
+
+    .message {
+      padding-left: 0.5rem;
+      max-width: 220px;
+      margin-left: 0px;
+      p {
+        color: #b4b6be;
+        font-size: 1rem;
+        font-weight: 300;
+        background-color: #250202;
+        border-radius: 0px 10px 10px 10px;
+        padding: 1rem;
+      }
+
+      span {
+        color: #b4b6be;
+        font-size: 0.6rem;
+        padding-left: 0.5rem;
+        font-weight: 200;
+      }
+    }
+    .mess-right {
+      display: flex;
+      margin-left: auto;
+      flex-direction: column;
+      padding-right: 0.5rem;
+      margin-right: 0px;
+      max-width: 220px;
+      p {
+        background-color: $redColor;
+        text-align: end;
+        color: white;
+        border-radius: 10px 0px 10px 10px;
+      }
+      span {
+        padding-left: 0rem;
+        width: 100%;
+        padding-right: 0.5rem;
+        text-align: end;
+      }
+    }
+  }
+
+  .send {
+    height: 50px;
+    display: flex;
+    width: 100%;
+    input {
+      background-color: #404450;
+      width: 80%;
+      padding-left: 1rem;
+      text-decoration: none;
+      border-radius: 5px 0px 0px 5px;
+      border: none;
+      &:focus {
+        outline: none;
+      }
+    }
+    button {
+      background-color: $yellowColor;
+      width: 20%;
+      border-radius: 0px 5px 5px 0px;
+      border: none;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
